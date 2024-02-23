@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.parking.model.vehicle.Vehicle;
 
-public class ParkingTest {
+public class VehicleTest {
     private final Vehicle vehicle = new Vehicle("car", "KA-01-HH-1234", "White");
 
     @Test
@@ -27,5 +27,7 @@ public class ParkingTest {
         assertEquals("KA-01-HH-1234", vehicle.registration());
         assertEquals("White", vehicle.color());
     }
+
+
 
 }
