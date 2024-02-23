@@ -1,0 +1,57 @@
+name: CI/CD Java
+
+on:
+  push:
+    branches:
+      - developer
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Build and test
+        run: mvn clean test
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: target/surefire-reports
+
+  coverage:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download test results
+        uses: actions/download-artifact@v2
+        with:
+          name: test-results
+          path: target/surefire-reports
+
+      - name: Generate coverage report
+        run: jacoco-maven-plugin report
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: target/site/jacoco/
+
+**Explicação:**
+
+* O workflow é executado quando há um push para a branch `main`.
+* O job `build` faz o checkout do código, configura o JDK 17, compila o código e executa os testes unitários com Maven.
+* O job `coverage` baixa os resultados dos testes do job `build`, gera um relatório de cobertura de testes com JaCoCo e faz o upload do relatório.
+
+
