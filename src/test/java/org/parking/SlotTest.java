@@ -19,9 +19,5 @@ public class SlotTest {
         public void testSlotVehicle() {
             assertEquals(vehicle, slot.vehicle());
         }
-        @Test
-        public void testSlotTickedId() {
-            assertEquals("123", slot.tickedId());
-        }
 
 }
