@@ -48,10 +48,4 @@ jobs:
           name: coverage-report
           path: target/site/jacoco/
 
-**Explicação:**
-
-* O workflow é executado quando há um push para a branch `main`.
-* O job `build` faz o checkout do código, configura o JDK 17, compila o código e executa os testes unitários com Maven.
-* O job `coverage` baixa os resultados dos testes do job `build`, gera um relatório de cobertura de testes com JaCoCo e faz o upload do relatório.
-
 
